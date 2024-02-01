@@ -125,7 +125,7 @@ local Color = require('colorbuddy').Color
 Color.new('white',     '#f2e5bc')
 Color.new('red',       '#cc6666')
 Color.new('pink',      '#fef601')
-Color.new('green',     '#99cc99')
+Color.new('green',     '#99cc99') -- check this
 Color.new('yellow',    '#f8fe7a')
 Color.new('blue',      '#81a2be')
 Color.new('aqua',      '#8ec07c')
@@ -229,158 +229,190 @@ return {
 }
 --]]
 
-
-local M = {}
-
+-- TODO
+--	Need a good color for operator, one that is a little more hc but not white_bright
 local c = {
 	bg = "#151515",
 	bg_brighter = "#1d2021", -- gruvbox dark bg0_h
 	bg_brightest = "#282828", -- gruvbox dark bg
-	gray = "#696969",       -- tairiki gray
+	gray = "#696969",      -- tairiki gray
 	gray_bright = "#969896", -- tairiki gray+light
-	aqua = "#8ec07c",       -- gruvbox dark aqua light
-	white = "#a89984",      -- tairiki comment
+	aqua = "#8ec07c",      -- gruvbox dark aqua light
+	white = "#a89984",     -- tairiki comment
 	--white_bright = "#f2e5bc", -- gruvbox light bg0_s
 	white_bright = "#fbf1c7", -- gruvbox light bg0_s
-	blue = "#81a2be",       -- not sure about this blue
+	blue = "#81a2be",      -- not sure about this blue
 	blue_bright = "#ff00ff",
-	purple = "#8e6fbd",     -- gruvbuddy purple
+	purple = "#8e6fbd",    -- gruvbuddy purple -- this color sucks
 	purple_bright = "#b294bb",
-	green = "#b5bd68",      -- tairiki green
-	red = "#cc6666",        -- tomorrow night red
+	green = "#b5bd68",     -- tairiki green
+	red = "#cc6666",       -- tomorrow night red
 	red_bright = "#fb4934", -- gruvbox dark red bright
 	-- yellow = "#f8fe7a",
 	-- yellow = "#f0c674", tairiki yellow
-	yellow = "#facd4f", -- brightened gruvbox dark yellow
-	yellow_bright = "#fef601", -- gruvbuddy 'pink'
-	orange = "#fe9019", -- gruvbox dark orange
+	yellow = "#facd4f",        -- brightened gruvbox dark yellow
+	yellow_bright = "#f8fe7a",
+	yellow_brightest = "#fef601", -- gruvbuddy 'pink'
+	orange = "#fe9019",        -- gruvbox dark orange
 	orange_bright = "#e78c45", -- tairiki light_orange
 	none = "none",
 }
 
-local hl = vim.api.nvim_set_hl
--- hl( 0, "Name", { fg, bg, sp, blend, bold, underline, italic, reverse, link, }
-
--- vim highlights
-hl(0, "ColorColumn", { fg = c.none, bg = c.bg_brightest })
-hl(0, "Conceal", { fg = c.white, bg = c.none })
-hl(0, "CurSearch", { link = "Search" })
-hl(0, "Cursor", { fg = c.none, bg = c.none }) -- check this
-hl(0, "CursorColumn", { bg = c.gray })
-hl(0, "CursorIM", { bg = c.gray })            -- check this
-hl(0, "CursorLine", { bg = c.gray })
-hl(0, "CursorLineFold", { bg = c.red })       -- check this
-hl(0, "CursorLineNr", { fg = c.yellow_bright, bold = true })
-hl(0, "CursorLineSign", {})
-hl(0, "DiffAdd", { fg = c.green })    -- maybe make specific colors for diffs
-hl(0, "DiffChanged", { fg = c.blue }) -- maybe make specific colors for diffs
-hl(0, "DiffDelete", { fg = c.red })   -- maybe make specific colors for diffs
-hl(0, "DiffText", { fg = c.white })   -- maybe make specific colors for diffs
-hl(0, "Directory", { fg = c.blue })
-hl(0, "EndOfBuffer", { fg = c.gray })
-hl(0, "ErrorMsg", { fg = c.red })
-hl(0, "FloatBoarder", { fg = c.gray, bg = c.none })
-hl(0, "FloatTitle", { fg = c.white_bright })
-hl(0, "FoldColumn", { fg = c.red_bright }) -- check this
-hl(0, "Folded", { fg = c.red_bright })     -- check this
-hl(0, "IncSearch", { link = "Search" })
-hl(0, "LineNr", { fg = c.yellow })
-hl(0, "LineNrAbove", { fg = c.gray_bright })
-hl(0, "LineNrBelow", { link = "LineNrAbove" })
-hl(0, "MatchParen", { fg = c.aqua, underline = true })
-hl(0, "Menu", { fg = c.white_bright })
-hl(0, "ModeMsg", { link = "Normal" })
-hl(0, "MoreMsg", { fg = c.purple })
-hl(0, "MsgArea", {})                     -- check this
-hl(0, "MsgSeparator", { fg = c.purple }) -- check this
-hl(0, "NonText", { fg = c.gray })
-hl(0, "Normal", { fg = c.white_bright, bg = c.bg })
-hl(0, "NormalFloat", { link = "Normal" })
-hl(0, "NormalNc", { link = "Normal" })                       -- keep non focused the same
-hl(0, "Pmenu", { fg = c.white, bg = c.bg_brighter })
-hl(0, "PmenuExtra", { fg = c.gray, bg = c.bg_brighter })     -- check this
-hl(0, "PmenuExtraSel", { fg = c.white, bg = c.bg_brightest }) -- check this
-hl(0, "PmenuKind", { fg = c.blue, bg = c.bg_brighter })      -- check this
-hl(0, "PmenuKindSel", { fg = c.green, bg = c.bg_brightest })  -- check this
-hl(0, "PmenuSbar", {})
-hl(0, "PmenuSel", { fg = c.red, bg = c.bg_brightest })
-hl(0, "PmenuThumb", {})
-hl(0, "Question", { link = "Normal" })
-hl(0, "QuickFixLine", { fg = c.white })
-hl(0, "Scrollbar", {})
-hl(0, "Search", { fg = c.bg, bg = c.orange_bright })
-hl(0, "SignColumn", { fg = c.red, bg = c.bg })
-hl(0, "SpecialKey", { fg = c.red_bright })
-hl(0, "SpellBad", { fg = c.bg_brighter, underline = true })   -- check this
-hl(0, "SpellCap", { fg = c.bg_brighter, underline = true })   -- check this
-hl(0, "SpellLocal", { fg = c.bg_brighter, underline = true }) -- check this
-hl(0, "SpellRare", { fg = c.bg_brighter, underline = true })  -- check this
-hl(0, "StatusLine", { fg = c.white_bright, bg = c.bg_brightest })
-hl(0, "StatusLineNC", { link = "StatusLine" })
-hl(0, "Substitute", { link = "Search" })
-hl(0, "TabLine", { link = "StatusLine" })
-hl(0, "TabLineFill", { link = "StatusLine" })
-hl(0, "TabLineSel", { link = "StatusLine" })
-hl(0, "TermCursor", { link = "StatusLine" })
-hl(0, "TermCursorNC", { link = "StatusLine" })
-hl(0, "Title", { link = "StatusLine" })
-hl(0, "ToolTip", { link = "StatusLine" })
-hl(0, "Visual", { bg = "#282828", bold = true })
-hl(0, "VisualNOS", { link = "StatusLine" })
-hl(0, "WarningMsg", { link = "StatusLine" })
-hl(0, "Whitespace", { link = "StatusLine" })
-hl(0, "WildMenu", { link = "StatusLine" })
-hl(0, "WinBar", { link = "StatusLine" })
-hl(0, "WinBarNc", { link = "StatusLine" })
-hl(0, "WinSeparator", { fg = c.gray, bg = c.bg })
-hl(0, "lCursor", { fg = c.gray, bg = c.bg })
-
--- base syntax highlights
-hl(0, "Comment", { fg = c.white })
-
-hl(0, "Constant", { fg = c.yellow_bright })
-hl(0, "String", { fg = c.green })
-hl(0, "Number", { fg = c.orange })
-hl(0, "Boolean", { fg = c.orange_bright })
-hl(0, "Float", { link = "Number" })
-
-hl(0, "Identifier", { fg = c.red, bold = true })
-hl(0, "Function", { fg = c.yellow, bold = true })
-
-hl(0, "Statement", { fg = c.blue })
-hl(0, "Conditional", { link = "Keyword" })
-hl(0, "Repeat", { link = "Keyword" })
-hl(0, "Label", { link = "Keyword" })
-hl(0, "Operator", { fg = c.white }) -- check this
-hl(0, "Keyword", { fg = c.purple_bright })
-hl(0, "Exception", { fg = c.bright_red })
-
-hl(0, "PreProc", { fg = c.purple }) -- check this
-hl(0, "Include", { fg = c.purple }) -- check this
-hl(0, "Define", { fg = c.purple }) -- check this
-hl(0, "Macro", { fg = c.orange_bright })
-hl(0, "PreCondit", { fg = c.purple }) -- check this
-
-hl(0, "Type", { fg = "#ffff00" }) -- check this
-hl(0, "StorageClass", { fg = c.red })
-hl(0, "Structure", { fg = c.orange }) -- chekc this
-hl(0, "Typedef", { fg = c.purple }) -- check this
-
-hl(0, "Special", { fg = c.red })
-hl(0, "SpecialChar", { fg = c.red })
-hl(0, "Tag", { fg = "#ff00ff" }) -- check this
-hl(0, "Delimiter", { fg = c.gray })
-hl(0, "SpecialComment", { fg = c.white_bright })
-hl(0, "Debug", { fg = c.orange })
-
-hl(0, "Underlined", { fg = c.aqua, underline = true })
-
-hl(0, "Ignore", { fg = c.gray})
-
-hl(0, "Error", { fg = c.red})
-
-hl(0, "Todo", { fg = c.bright_red, bold = true})
 
 
+local M = {}
+local default_opts = {}
 
+local function highlight()
+	local hl = vim.api.nvim_set_hl
+	-- hl( 0, "Name", { fg, bg, sp, blend, bold, underline, italic, reverse, link, }
 
+	-- vim highlights
+	hl(0, "ColorColumn", { fg = c.none, bg = c.bg_brightest })
+	hl(0, "Conceal", { fg = c.white, bg = c.none })
+	hl(0, "CurSearch", { link = "Search" })
+	hl(0, "Cursor", { fg = c.none, bg = c.none }) -- check this
+	hl(0, "CursorColumn", { bg = c.gray })
+	hl(0, "CursorIM", { bg = c.gray })         -- check this
+	hl(0, "CursorLine", { bg = c.gray })
+	hl(0, "CursorLineFold", { bg = c.red })    -- check this
+	hl(0, "CursorLineNr", { fg = c.yellow_bright, bold = true })
+	hl(0, "CursorLineSign", {})
+	hl(0, "DiffAdd", { fg = c.green }) -- maybe make specific colors for diffs
+	hl(0, "DiffChange", { fg = c.blue }) -- maybe make specific colors for diffs
+	hl(0, "DiffDelete", { fg = c.red }) -- maybe make specific colors for diffs
+	hl(0, "DiffText", { fg = c.white }) -- maybe make specific colors for diffs
+	hl(0, "Directory", { fg = c.blue })
+	hl(0, "EndOfBuffer", { fg = c.gray })
+	hl(0, "ErrorMsg", { fg = c.red })
+	hl(0, "FloatBoarder", { fg = c.gray, bg = c.none })
+	hl(0, "FloatTitle", { fg = c.white_bright })
+	hl(0, "FoldColumn", { fg = c.red_bright }) -- check this
+	hl(0, "Folded", { fg = c.red_bright })  -- check this
+	hl(0, "IncSearch", { link = "Search" })
+	hl(0, "LineNr", { fg = c.yellow, bold = true })
+	hl(0, "LineNrAbove", { fg = c.gray_bright })
+	hl(0, "LineNrBelow", { link = "LineNrAbove" })
+	hl(0, "MatchParen", { fg = c.aqua, underline = true })
+	hl(0, "Menu", { fg = c.white_bright })
+	hl(0, "ModeMsg", { link = "Normal" })
+	hl(0, "MoreMsg", { fg = c.purple })
+	hl(0, "MsgArea", {})                  -- check this
+	hl(0, "MsgSeparator", { fg = c.purple }) -- check this
+	hl(0, "NonText", { fg = c.gray })
+	hl(0, "Normal", { fg = c.white_bright, bg = c.bg })
+	hl(0, "NormalFloat", { link = "Normal" })
+	hl(0, "NormalNc", { link = "Normal" })                     -- keep non focused the same
+	hl(0, "Pmenu", { fg = c.white, bg = c.bg_brighter })
+	hl(0, "PmenuExtra", { fg = c.gray, bg = c.bg_brighter })   -- check this
+	hl(0, "PmenuExtraSel", { fg = c.white, bg = c.bg_brightest }) -- check this
+	hl(0, "PmenuKind", { fg = c.blue, bg = c.bg_brighter })    -- check this
+	hl(0, "PmenuKindSel", { fg = c.green, bg = c.bg_brightest }) -- check this
+	hl(0, "PmenuSbar", {})
+	hl(0, "PmenuSel", { fg = c.red, bg = c.bg_brightest })
+	hl(0, "PmenuThumb", {})
+	hl(0, "Question", { link = "Normal" })
+	hl(0, "QuickFixLine", { fg = c.white })
+	hl(0, "Scrollbar", {})
+	hl(0, "Search", { fg = c.bg, bg = c.orange_bright })
+	hl(0, "SignColumn", { fg = c.red, bg = c.bg })
+	hl(0, "SpecialKey", { fg = c.red_bright })
+	hl(0, "SpellBad", { fg = c.bg_brighter, underline = true }) -- check this
+	hl(0, "SpellCap", { fg = c.bg_brighter, underline = true }) -- check this
+	hl(0, "SpellLocal", { fg = c.bg_brighter, underline = true }) -- check this
+	hl(0, "SpellRare", { fg = c.bg_brighter, underline = true }) -- check this
+	hl(0, "StatusLine", { fg = c.white_bright, bg = c.bg_brightest })
+	hl(0, "StatusLineNC", {})
+	hl(0, "Substitute", { link = "Search" })
+	hl(0, "TabLine", { link = "StatusLine" })
+	hl(0, "TabLineFill", { link = "StatusLine" })
+	hl(0, "TabLineSel", { link = "StatusLine" })
+	hl(0, "TermCursor", { link = "StatusLine" })
+	hl(0, "TermCursorNC", { link = "StatusLine" })
+	hl(0, "Title", { fg = "#ff00ff" })
+	hl(0, "ToolTip", { link = "StatusLine" })
+	hl(0, "Visual", { bg = "#282828", bold = true })
+	hl(0, "VisualNOS", { link = "StatusLine" })
+	hl(0, "WarningMsg", { link = "StatusLine" })
+	hl(0, "Whitespace", { link = "StatusLine" })
+	hl(0, "WildMenu", { link = "StatusLine" })
+	hl(0, "WinBar", { link = "StatusLine" })
+	hl(0, "WinBarNc", { link = "StatusLine" })
+	hl(0, "WinSeparator", { fg = c.gray, bg = c.bg })
+	hl(0, "lCursor", { fg = c.gray, bg = c.bg })
+
+	-- base syntax highlights
+	hl(0, "Comment", { fg = c.white })
+
+	hl(0, "Constant", { fg = c.orange_bright })
+	hl(0, "String", { fg = c.green })
+	hl(0, "Number", { fg = c.orange })
+	hl(0, "Boolean", { fg = c.orange_bright })
+	hl(0, "Float", { link = "Number" })
+
+	hl(0, "Identifier", { fg = c.red })
+	hl(0, "Function", { fg = c.yellow_bright, bold = true })
+
+	hl(0, "Statement", { fg = c.blue })
+	hl(0, "Conditional", { link = "Keyword" })
+	hl(0, "Repeat", { link = "Keyword" })
+	hl(0, "Label", { link = "Keyword" })
+	hl(0, "Operator", { fg = c.white }) -- check this
+	hl(0, "Keyword", { fg = c.purple_bright })
+	hl(0, "Exception", { fg = c.bright_red })
+
+	hl(0, "PreProc", { fg = c.purple }) -- check this
+	hl(0, "Include", { fg = c.purple }) -- check this
+	hl(0, "Define", { fg = c.purple }) -- check this
+	hl(0, "Macro", { fg = c.orange_bright })
+	hl(0, "PreCondit", { fg = c.purple }) -- check this
+
+	hl(0, "Type", { fg = c.yellow })   -- check this
+	hl(0, "StorageClass", { fg = c.red })
+	hl(0, "Structure", { fg = c.orange }) -- chekc this
+	hl(0, "Typedef", { fg = c.purple }) -- check this
+
+	hl(0, "Special", { fg = c.red })   -- check this
+	hl(0, "SpecialChar", { fg = c.red })
+	--hl(0, "Tag", { fg = "#ff00ff" }) -- check this
+	hl(0, "Tag", {})
+	hl(0, "Delimiter", { fg = c.gray })
+	hl(0, "SpecialComment", { fg = c.white_bright })
+	hl(0, "Debug", { fg = c.orange })
+
+	hl(0, "Underlined", { fg = c.aqua, underline = true })
+
+	hl(0, "Ignore", { fg = c.gray })
+
+	hl(0, "Error", { fg = c.red })
+
+	hl(0, "Todo", { fg = c.bright_red, bold = true })
+
+	-- lsp semantic highlights
+	hl(0, "@lsp.type.function", {})
+	hl(0, "@lsp.type.variable", {})
+	hl(0, "@lsp.type.property", {})
+	hl(0, "@lsp.mod", {})
+end
+
+function M.setup(opts)
+	if opts then
+		opts = vim.tbl_deep_extend("force", default_opts, opts)
+	end
+
+	vim.cmd "hi clear"
+	if vim.fn.exists("syntax_on") then
+		vim.cmd "syntax reset"
+	end
+	vim.o.termguicolors = true
+	vim.g.colors_name = "slim"
+	-- todo modularize this maybe
+	highlight()
+	-- term colors?
+end
+
+function M.load()
+	vim.api.nvim_command("colorscheme slim")
+end
+
+return M
