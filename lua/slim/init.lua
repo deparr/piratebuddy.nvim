@@ -236,7 +236,125 @@ return {
 --		fidget
 --		lazy
 --		fugitive
---		
+--		true
+local clamp = function(val, min, max)
+	if val >= min and val <= max then
+		return val
+	end
+	if val < min then
+		return min
+	end
+	if val > max then
+		return max
+	end
+end
+
+
+local hue_to_rgb = function(p, q, hue)
+	if hue < 0 then
+		hue = hue + 1
+	end
+	if hue > 1 then
+		hue = hue - 1
+	end
+
+	if hue < 1 / 6 then
+		return p + (q - p) * hue * 6
+	end
+	if hue < 1 / 2 then
+		return q
+	end
+	if hue < 2 / 3 then
+		return p + (q - p) * (2 / 3 - hue) * 6
+	end
+	return p
+end
+
+local rgb_to_hsl = function(r, g, b)
+	r = r or 0
+	g = g or 0
+	b = b or 0
+
+	local min = math.max(math.min(r, g, b), 0)
+	local max = math.min(math.max(r, g, b), 1)
+	local delta = max - min
+
+	local h, s, l = 0, 0, ((min + max) / 2)
+
+	-- Achromatic, can skip the rest
+	if max == min then
+		return max * 359, 0, l
+	end
+
+	if l < 0.5 then
+		s = delta / (max + min)
+	end
+	if l >= 0.5 then
+		s = delta / (2 - max - min)
+	end
+
+	if delta > 0 then
+		-- if max == r and max ~= g then h = h + (g-b)/delta end
+
+		if max == r then
+			h = (g - b) / delta
+			if g < b then
+				h = h + 6
+			end
+		elseif max == g then
+			h = 2 + (b - r) / delta
+		elseif max == b then
+			h = 4 + (r - g) / delta
+		end
+		h = h / 6
+	end
+
+	if h < 0 then
+		h = h + 1
+	end
+	if h > 1 then
+		h = h - 1
+	end
+
+	-- return math.floor(h * 360), s, l
+	return h * 360, s, l
+end
+
+
+
+local hsl_to_rgb = function(h, s, L)
+	-- h = (h % 360) / 360
+	h = (h / 360) % 1
+
+	if s == 0 then
+		-- Achromatic result
+		return L, L, L
+	end
+
+	local m1, m2
+	if L <= 0.5 then
+		m2 = L * (s + 1)
+	else
+		m2 = (L + s) - (L * s)
+	end
+
+	m1 = L * 2 - m2
+
+	return clamp(hue_to_rgb(m1, m2, h + 1 / 3), 0, 1), clamp(hue_to_rgb(m1, m2, h), 0, 1),
+		clamp(hue_to_rgb(m1, m2, h - 1 / 3), 0, 1)
+end
+
+local hsl_to_rgb_string = function(H, S, L)
+	local r, g, b = hsl_to_rgb(H, S, L)
+
+	r = r * 255
+	g = g * 255
+	b = b * 255
+
+	return string.format("#%02x%02x%02x", r, g, b)
+end
+
+
 local c = {
 	bg = "#151515",
 	bg_brighter = "#1d2021", -- gruvbox dark bg0_h
@@ -260,7 +378,7 @@ local c = {
 	yellow_bright = "#f8fe7a",
 	yellow_brightest = "#fef601", -- gruvbuddy 'pink'
 	orange = "#de935f",
-	orange_gruv = "#fe9019",        -- gruvbox dark orange
+	orange_gruv = "#fe9019",   -- gruvbox dark orange
 	orange_bright = "#e78c45", -- tairiki light_orange
 	coral = "#a16a45",
 	coral_bright = "#e8bd90",
@@ -268,9 +386,26 @@ local c = {
 }
 
 
+local ch = {}
+
+for k, v in pairs(c) do
+	if k == "none" then
+		ch[k] = v
+	else
+		local s = string.sub(v, 2)
+		local r = tonumber(string.sub(s, 1, 2), 16) / 255
+		local g = tonumber(string.sub(s, 3, 4), 16) / 255
+		local b = tonumber(string.sub(s, 5, 6), 16) / 255
+
+		local hsl = {}
+		hsl.h, hsl.s, hsl.l  = rgb_to_hsl(r, g, b)
+		ch[k] = hsl
+	end
+end
 
 local M = {}
 local default_opts = {}
+print(vim.inspect(ch))
 
 local function highlight()
 	local hl = vim.api.nvim_set_hl
@@ -311,12 +446,12 @@ local function highlight()
 	hl(0, "NonText", { fg = c.gray })
 	hl(0, "Normal", { fg = c.white_bright, bg = c.bg })
 	hl(0, "NormalFloat", { link = "Normal" })
-	hl(0, "NormalNc", { link = "Normal" })                     -- keep non focused the same
+	hl(0, "NormalNc", { link = "Normal" })                          -- keep non focused the same
 	hl(0, "Pmenu", { fg = c.gray_bright, bg = c.bg_brighter })
-	hl(0, "PmenuExtra", { fg = c.red_bright, bg = c.bg_brighter })   -- check this
+	hl(0, "PmenuExtra", { fg = c.red_bright, bg = c.bg_brighter })  -- check this
 	hl(0, "PmenuExtraSel", { fg = c.red_bright, bg = c.bg_brightest }) -- check this
-	hl(0, "PmenuKind", { fg = c.blue, bg = c.bg_brighter })    -- check this
-	hl(0, "PmenuKindSel", { fg = c.blue, bg = c.bg_brightest }) -- check this
+	hl(0, "PmenuKind", { fg = c.blue, bg = c.bg_brighter })         -- check this
+	hl(0, "PmenuKindSel", { fg = c.blue, bg = c.bg_brightest })     -- check this
 	hl(0, "PmenuSel", { fg = c.blue, bg = c.bg_brightest })
 	hl(0, "PmenuSbar", { fg = c.none, bg = c.bg_brighter })
 	hl(0, "PmenuThumb", { fg = c.none, bg = "#404040" })
@@ -373,20 +508,20 @@ local function highlight()
 	hl(0, "Keyword", { fg = c.purple_bright })
 	hl(0, "Exception", { fg = c.bright_red })
 
-	hl(0, "PreProc", { fg = c.purple }) -- check this
-	hl(0, "Include", { fg = c.purple }) -- check this
-	hl(0, "Define", { fg = c.purple }) -- check this
+	hl(0, "PreProc", { fg = c.purple })                  -- check this
+	hl(0, "Include", { fg = c.purple })                  -- check this
+	hl(0, "Define", { fg = c.purple })                   -- check this
 	hl(0, "Macro", { fg = c.orange_bright })
-	hl(0, "PreCondit", { fg = c.purple }) -- check this
+	hl(0, "PreCondit", { fg = c.purple })                -- check this
 
-	hl(0, "Type", { fg = c.yellow })   -- check this
+	hl(0, "Type", { fg = c.yellow })                     -- check this
 	hl(0, "StorageClass", { fg = c.red })
-	hl(0, "Structure", { fg = c.orange }) -- chekc this
-	hl(0, "Typedef", { fg = c.purple }) -- check this
+	hl(0, "Structure", { fg = c.orange })                -- chekc this
+	hl(0, "Typedef", { fg = c.purple })                  -- check this
 
-	hl(0, "Special", { fg = c.purple_bright, bold = true })   -- check this
+	hl(0, "Special", { fg = c.purple_bright, bold = true }) -- check this
 	hl(0, "SpecialChar", { fg = c.coral })
-	hl(0, "Tag", { fg = c.red_bright }) -- check this
+	hl(0, "Tag", { fg = c.red_bright })                  -- check this
 	hl(0, "Delimiter", { fg = c.gray })
 	hl(0, "SpecialComment", { fg = c.white_bright })
 	hl(0, "Debug", { fg = c.orange })
