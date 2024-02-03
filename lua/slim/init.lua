@@ -230,7 +230,7 @@ return {
 --]]
 
 -- TODO
---	Need a good color for operator, one that is a little more hc but not white_bright
+--	Need a good color for operator, one that is a little more hc but not white_light
 --  Lsp and diagnostic highlights
 --	plugins????
 --		fidget
@@ -364,9 +364,9 @@ local c = {
 	gray_bright = "#969896", -- tairiki gray+light
 	aqua = "#8ec07c",      -- gruvbox dark aqua light
 	white = "#a89984",     -- tairiki comment
-	--white_bright = "#f2e5bc", -- gruvbox light bg0_s
-	white_bright = "#fbf1c7", -- gruvbox light bg0_s
-	white_brightest = "#e0e0e0",
+	--white_light = "#f2e5bc", -- gruvbox light bg0_s
+	white_light = "#fbf1c7", -- gruvbox light bg0_s
+	white_light_2 = "#e0e0e0",
 	blue = "#81a2be",      -- not sure about this blue -- tairiki blue
 	blue_bright = "#8abeb7",
 	purple = "#ae93e0",    -- gruvbuddy purple -- this color sucks
@@ -392,8 +392,15 @@ local c = {
 	bg = "#151515",
 	bg_brighter = "#1d2021", -- gruvbox dark bg0_h
 	bg_brightest = "#282828", -- gruvbox dark bg
-	white = "#f2e5bc",
-	red = "#cc6666",       -- tomorrow night red
+	bg_dark = "#080808",
+	-- white = "#f2e5bc",
+	white = "#ebdbb2",
+	white_light = "#e0e0e0",
+	white_light_2 = "#fafafa",
+	gray = "#696969",    -- tairiki gray,
+	gray_light = "#9c9c9c", -- tairiki gray, lightened
+	gray_dark = "#404040", -- tairiki gray,
+	red = "#cc6666",     -- tomorrow night red
 	red_light = "#d98c8c",
 	red_light_2 = "#e6b3b3",
 	red_dark = "#bf4040",
@@ -402,10 +409,10 @@ local c = {
 	yellow = "#f8fe7a",
 	yellow_light = "#fbffae",
 	yellow_dark = "#f5fe48",
-	blue = "#81a2be",      -- not sure about this blue -- tairiki blue,
+	blue = "#81a2be", -- not sure about this blue -- tairiki blue,
 	blue_light = "#a4bcd0",
 	blue_dark = "#618aae",
-	aqua = "#8ec07c",      -- gruvbox dark aqua light,
+	aqua = "#8ec07c", -- gruvbox dark aqua light,
 	cyan = "#8abeb7",
 	purple = "#8e6fbd",
 	purple_light = "#aa93cd",
@@ -420,14 +427,12 @@ local c = {
 	brown = "#a3685a",
 	seagreen = "#698b69",
 
-	gray = "#696969",      -- tairiki gray,
-	gray_bright = "#969896", -- tairiki gray+light,
-	tairiki_white = "#a89984",     -- tairiki comment,
+	gray_bright = "#969896",   -- tairiki gray+light,
+	tairiki_white = "#a89984", -- tairiki comment,
 	yellow_brightest = "#fef601", -- gruvbuddy 'pink'
-	white_bright = "#fbf1c7", -- gruvbox light bg0_s,
-	white_brightest = "#e0e0e0",
+	--white_light = "#fbf1c7",  -- gruvbox light bg0_s,
 	blue_bright = "#8abeb7",
-	orange_gruv = "#fe9019",   -- gruvbox dark orange
+	orange_gruv = "#fe9019", -- gruvbox dark orange
 	orange_bright = "#e78c45", -- tairiki light_orange
 	coral = "#a16a45",
 	coral_bright = "#e8bd90",
@@ -463,76 +468,78 @@ local function highlight()
 
 	-- vim highlights
 	hl(0, "ColorColumn", { fg = c.none, bg = c.bg_brightest })
-	hl(0, "Conceal", { fg = c.white, bg = c.none })
+	hl(0, "Conceal", { fg = c.gray, bg = c.none })
 	hl(0, "CurSearch", { link = "Search" })
-	hl(0, "Cursor", { fg = c.bg })
+	hl(0, "Cursor", { fg = c.bg, bg = c.white_light }) -- check this
 	hl(0, "CursorColumn", { bg = c.gray })
 	hl(0, "CursorIM", { fg = "#ffff00", bg = "#ff0000" })
-	hl(0, "CursorLine", { bg = c.gray })
+	hl(0, "CursorLine", { bg = c.bg_brighter })
 	-- hl(0, "CursorLineFold", { bg = "#ff0000" })    -- check this -- clear these for now
 	hl(0, "CursorLineNr", { fg = c.yellow, bold = true })
 	hl(0, "CursorLineSign", {})
-	hl(0, "DiffAdd", { fg = c.green }) -- maybe make specific colors for diffs
-	hl(0, "DiffChange", { fg = c.blue }) -- maybe make specific colors for diffs
-	hl(0, "DiffDelete", { fg = c.red }) -- maybe make specific colors for diffs
+	hl(0, "DiffAdd", { fg = c.green })       -- maybe make specific colors for diffs
+	hl(0, "DiffChange", { fg = c.blue })     -- maybe make specific colors for diffs
+	hl(0, "DiffDelete", { fg = c.red })      -- maybe make specific colors for diffs
 	hl(0, "DiffText", { fg = c.tairiki_white }) -- maybe make specific colors for diffs
-	hl(0, "Directory", { fg = c.blue }) -- is orange:light in orig
+	hl(0, "Directory", { fg = c.blue })      -- is orange:light in orig
 	hl(0, "EndOfBuffer", { fg = c.gray })
 	hl(0, "ErrorMsg", { fg = c.red })
-	hl(0, "FloatBoarder", { fg = c.gray, bg = c.none })
-	hl(0, "FloatTitle", { fg = c.white_bright })
+	--hl(0, "FloatBorder", { fg = c.white_light_2, bg = c.bg_dark })
+	hl(0, "FloatBorder", { fg = c.bg_dark, bg = c.bg_dark })
+	hl(0, "FloatTitle", { fg = c.white_light })
 	-- hl(0, "FoldColumn", { fg = c.red_bright }) -- check this -- clear these for now
 	-- hl(0, "Folded", { fg = c.red_bright })  -- check this
 	hl(0, "IncSearch", { link = "Search" })
-	hl(0, "InvNormal", { fg = c.bg, bg = c.white})
+	hl(0, "InvNormal", { fg = c.bg, bg = c.white })
 	hl(0, "LineNr", { fg = c.yellow, bold = true })
 	hl(0, "LineNrAbove", { fg = c.gray_bright })
 	hl(0, "LineNrBelow", { link = "LineNrAbove" })
 	hl(0, "MatchParen", { fg = c.cyan })
-	hl(0, "Menu", { fg = c.white_bright })
+	hl(0, "Menu", { fg = c.white_light })
 	hl(0, "ModeMsg", { link = "Normal" })
 	hl(0, "MoreMsg", { fg = c.purple_bright })
 	hl(0, "MsgArea", { bg = c.bg })
 	hl(0, "MsgSeparator", { fg = c.white }) -- check this
-	hl(0, "NonText", { fg = c.gray })
-	hl(0, "Normal", { fg = c.white_brightest, bg = c.bg })
-	hl(0, "NormalFloat", { link = "Normal" })
-	hl(0, "NormalNc", { link = "Normal" })                          -- keep non focused the same
-	hl(0, "Pmenu", { fg = c.gray_bright, bg = c.bg_brighter })
+	hl(0, "NonText", { fg = c.gray_dark })
+	hl(0, "Normal", { fg = c.white_light, bg = c.bg })
+	hl(0, "NormalFloat", { fg = c.white_light_2, bg = c.bg_dark })
+	hl(0, "NormalNc", { link = "Normal" }) -- keep non focused the same
+	hl(0, "Pmenu", { fg = c.gray_light, bg = c.bg_brightest })
+	hl(0, "PmenuSel", { fg = c.bg, bg = c.yellow_light })
+	hl(0, "PmenuSbar", { fg = c.none, bg = c.bg })
+	hl(0, "PmenuThumb", { fg = c.none, bg = c.gray_dark })
 	hl(0, "PmenuExtra", { fg = c.red_bright, bg = c.bg_brighter })  -- check this
 	hl(0, "PmenuExtraSel", { fg = c.red_bright, bg = c.bg_brightest }) -- check this
 	hl(0, "PmenuKind", { fg = c.blue, bg = c.bg_brighter })         -- check this
 	hl(0, "PmenuKindSel", { fg = c.blue, bg = c.bg_brightest })     -- check this
-	hl(0, "PmenuSel", { fg = c.blue, bg = c.bg_brightest })
-	hl(0, "PmenuSbar", { fg = c.none, bg = c.bg_brighter })
-	hl(0, "PmenuThumb", { fg = c.none, bg = "#404040" })
 	hl(0, "Question", { link = "Normal" })
-	hl(0, "QuickFixLine", { fg = c.blue_bright, underline = true })
-	hl(0, "qfSeparator", { fg = c.white_bright })
-	hl(0, "qfLineNr", { fg = c.white })
-	hl(0, "qfFileName", { fg = c.blue_bright })
+	hl(0, "QuickFixLine", { fg = c.blue, underline = true })
+	hl(0, "qfSeparator", { fg = c.gray })
+	hl(0, "qfLineNr", { fg = c.gray })
+	hl(0, "qfFileName", { fg = c.blue })
 	hl(0, "Scrollbar", {})
-	hl(0, "Search", { fg = c.bg, bg = c.orange_bright })
-	hl(0, "SignColumn", { fg = c.red, bg = c.bg })
+	hl(0, "Search", { fg = c.bg, bg = c.yellow }) -- check this i thin kI like orange or bright orange better
+	hl(0, "SignColumn", { fg = c.gray, bg = c.bg })
 	hl(0, "SpecialKey", { fg = c.red_bright })
 	hl(0, "SpellBad", { fg = c.red_bright, underline = true }) -- check this
 	hl(0, "SpellCap", { fg = c.red_bright, underline = true }) -- check this
 	hl(0, "SpellLocal", { fg = c.red_bright, underline = true }) -- check this
 	hl(0, "SpellRare", { fg = c.red_bright, underline = true }) -- check this
-	hl(0, "StatusLine", { fg = c.white_bright, bg = c.bg_brighter })
-	hl(0, "StatusLineNC", {})
+	hl(0, "StatusLine", { fg = c.white_light, bg = c.bg_brighter })
+	-- hl(0, "StatusLine", { fg = c.bg, bg = c.blue })           -- check this not sure if I like this
+	hl(0, "StatusLineNC", { fg = c.gray, bg = c.bg_brightest })
 	hl(0, "Substitute", { link = "Search" })
-	hl(0, "TabLine", { link = "StatusLine" })
-	hl(0, "TabLineFill", { link = "StatusLine" })
-	hl(0, "TabLineSel", { link = "StatusLine" })
-	hl(0, "TermCursor", { link = "StatusLine" })
-	hl(0, "TermCursorNC", { link = "StatusLine" })
-	hl(0, "Title", { fg = c.purple, bold = true })
+	hl(0, "TabLine", { fg = c.blue_dark, bg = c.bg_brighter })
+	hl(0, "TabLineFill", { fg = c.white, bg = c.bg_brightest, }) -- check this
+	hl(0, "TabLineSel", { fg = c.white_light_2, bg = c.bg_brighter, bold = true })
+	hl(0, "TermCursor", {})                                   -- check this
+	hl(0, "TermCursorNC", {})                                 -- check this
+	hl(0, "Title", { fg = "Magenta", bold = true })
 	hl(0, "ToolTip", { link = "StatusLine" })
-	hl(0, "Visual", { bg = c.bg_brightest, bold = true })
+	hl(0, "Visual", { bg = c.bg_brightest })
 	hl(0, "VisualNOS", { link = "StatusLine" })
 	hl(0, "WarningMsg", { link = "StatusLine" })
-	hl(0, "Whitespace", { fg = c.white })
+	hl(0, "Whitespace", { fg = c.gray })
 	hl(0, "WildMenu", { fg = c.red })
 	hl(0, "WinBar", { link = "StatusLine" })
 	hl(0, "WinBarNc", { link = "StatusLine" })
@@ -541,9 +548,10 @@ local function highlight()
 	hl(0, "lCursor", { fg = c.gray, bg = c.bg })
 
 	-- base syntax highlights
-	hl(0, "Comment", { fg = c.tairiki_white, italic = true }) -- white in orig
+	--hl(0, "Comment", { fg = c.tairiki_white, italic = true }) -- white in orig
+	hl(0, "Comment", { fg = c.gray_light, italic = true })
 
-	hl(0, "Constant", { fg = c.orange, bold = true })
+	hl(0, "Constant", { fg = c.orange })
 	hl(0, "String", { fg = c.green })
 	hl(0, "Character", { fg = c.red })
 	hl(0, "Number", { fg = c.red })
@@ -551,35 +559,35 @@ local function highlight()
 	hl(0, "Float", { link = "Number" })
 
 	hl(0, "Identifier", { fg = c.red, bold = true })
-	hl(0, "Function", { fg = c.yellow_light }) -- is yellow in orig
+	hl(0, "Function", { fg = c.yellow })
 
 	hl(0, "Statement", { fg = c.red_dark })
 	hl(0, "Conditional", { fg = c.red })
-	hl(0, "Repeat", { fg  = c.red })
+	hl(0, "Repeat", { fg = c.red })
 	hl(0, "Label", { fg = c.yellow })
 	hl(0, "Operator", { fg = c.red_light_2 })
 	hl(0, "Keyword", { fg = c.violet })
 	hl(0, "Exception", { fg = c.bright_red })
 
-	hl(0, "PreProc", { fg = c.yellow })                  -- check this
-	hl(0, "Include", { fg = c.cyan })                  -- check this
-	hl(0, "Define", { fg = c.cyan })                   -- check this
-	hl(0, "Macro", { fg = c.orange_bright })
-	hl(0, "PreCondit", { fg = c.purple })                -- check this
+	hl(0, "PreProc", { fg = c.yellow })          -- check this
+	hl(0, "Include", { fg = c.cyan })            -- check this
+	hl(0, "Define", { fg = c.cyan })             -- check this
+	hl(0, "Macro", { fg = c.orange })
+	hl(0, "PreCondit", { fg = c.purple })        -- check this
 
-	hl(0, "Type", { fg = c.violet, italic = true })                     -- check this
+	hl(0, "Type", { fg = c.violet, italic = true }) -- check this
 	hl(0, "StorageClass", { fg = c.yellow })
-	hl(0, "Structure", { fg = c.violet })                -- chekc this
-	hl(0, "Typedef", { fg = c.yellow })                  -- check this
+	hl(0, "Structure", { fg = c.violet })        -- chekc this
+	hl(0, "Typedef", { fg = c.yellow })          -- check this
 
-	hl(0, "Special", { fg = c.violet, bold = true }) -- check this
-	hl(0, "SpecialChar", { fg = c.coral })
-	hl(0, "Tag", { fg = c.yellow })                  -- check this
-	hl(0, "Delimiter", { fg = c.violet })
-	hl(0, "SpecialComment", { fg = c.white_bright })
+	hl(0, "Special", { fg = c.purple_light, bold = true })
+	hl(0, "SpecialChar", { fg = c.orange }) --  brown in orig
+	hl(0, "Tag", { fg = c.yellow })
+	hl(0, "Delimiter", { fg = c.violet, bold = true })
+	hl(0, "SpecialComment", { fg = c.white_light })
 	hl(0, "Debug", { fg = c.orange })
 
-	hl(0, "Underlined", { fg = c.aqua, underline = true })
+	hl(0, "Underlined", { fg = c.blue, underline = true })
 
 	hl(0, "Ignore", { fg = c.gray })
 
@@ -599,9 +607,23 @@ local function highlight()
 	hl(0, "luaMetaTableAritmetic", { link = "luaMetaTableEvents" })
 	hl(0, "luaMetaTableEquivalence", { link = "luaMetaTableEvents" })
 	hl(0, "@function.call.lua", { link = "luaFunctionCall" })
+	hl(0, "@function.builtin.lua", { link = "luaFunctionCall" })
+	hl(0, "@punctuation.bracket.lua", {})
+	hl(0, "@field.lua", {})
+	hl(0, "@lsp.type.method.lua", { link = "luaFunctionCall" })
+	hl(0, "@lsp.type.function.lua", { link = "luaFunctionCall" })
+
+	-- python
+	hl(0, "@type.python", { fg = c.red, italic = true })
+
+	-- go
+	hl(0, "@type.go", { fg = c.red_dark, italic = true })
 
 	-- ocaml
 	hl(0, "@constructor.ocaml", { fg = c.orange })
+
+	-- typescript
+	hl(0, "@constructor.typescript", { fg = c.red })
 
 	-- html
 	-- check this, dont know how I want to handle this quite yet
@@ -614,7 +636,7 @@ local function highlight()
 	hl(0, "DiagnosticError", { fg = c.red, bold = true })
 	--hl(0, "DiagnosticWarn", { fg = c.orange })
 	--hl(0, "DiagnosticInfo", { fg = c.blue })
-	hl(0, "DiagnosticHint", { fg = c.violet })
+	hl(0, "DiagnosticHint", { fg = c.violet }) -- not in orig
 	hl(0, "DiagnosticDeprecated", { strikethrough = true })
 
 	-- treesitter
@@ -622,7 +644,7 @@ local function highlight()
 	hl(0, "@include", { link = "Include" })
 	hl(0, "@keyword", { link = "Keyword" })
 	hl(0, "@keyword.faded", { fg = c.gray })
-	hl(0, "@variable", { fg = c.white_brightest, bg = c.none })
+	hl(0, "@variable", { fg = c.white_light, bg = c.none })
 	hl(0, "@variable.builtin", { fg = c.purple_light_2 }) -- check this, dont kow if I like yellow here
 	hl(0, "@function", { link = "Function" })
 	hl(0, "@function.builtin", { link = "Function" })
@@ -631,12 +653,13 @@ local function highlight()
 	hl(0, "@property", { fg = c.blue })
 	hl(0, "@namespace", { fg = c.blue_light })
 	hl(0, "@normal", { link = "Normal" })
-	hl(0, "@punctuation.bracket", { fg = c.orange_light_2 }) -- check this used old TS name
+	hl(0, "@punctuation.bracket", { fg = c.violet, bold = true })
+	hl(0, "@text.title", { link = "Title" })
 
-	hl(0, "@type.go", {fg = c.violet_dark, italic = true})
+	hl(0, "@type.go", { fg = c.violet_dark, italic = true })
 
 	-- lsp semantic highlights get outta here
-	hl(0, "@lsp.type.function", {})
+	--hl(0, "@lsp.type.function", {})
 	hl(0, "@lsp.type.variable", {})
 	hl(0, "@lsp.type.property", {})
 	hl(0, "@lsp.type.parameter", { italic = true })
@@ -646,12 +669,24 @@ local function highlight()
 
 	-- plugins
 	-- telescope
-	hl(0, "TelescopeMatching", { fg = c.orange_sat, bg = c.none, bold = true})
+	hl(0, "TelescopeMatching", { fg = c.orange_sat, bg = c.none, bold = true })
 
 	-- treesitter context
 	hl(0, "TreesitterContext", { bg = c.bg_brighter })
 	hl(0, "TreesitterContextLineNumber", { fg = c.blue })
 
+	-- Netrw
+	hl(0, "netrwPlain", { fg = c.white })
+	hl(0, "netrwDir", { fg = c.blue_dark })
+	hl(0, "netrwClassify", { fg = c.yellow_light })
+	hl(0, "netrwSymLink", { fg = c.cyan })
+	hl(0, "netrwLink", { fg = c.cyan })
+	hl(0, "netrwExe", { fg = c.aqua })
+
+	-- TODO add these to personal config once hl overwrite is added
+	hl(0, "LspInfoBorder", { fg = c.bg_dark, bg = c.bg_dark })
+	hl(0, "@function.call.rust", { fg = c.blue_dark })
+	hl(0, "@lsp.type.method.rust", {})
 end
 
 function M.setup(opts)
