@@ -115,7 +115,7 @@ function M.highlight()
 	hi(0, "TabLine", { fg = c.blue_dark, bg = c.bg_light })
 	hi(0, "TabLineFill", { fg = c.white, bg = c.bg_light_2, }) -- check this
 	hi(0, "TabLineSel", { fg = c.white_light_2, bg = c.bg_light, bold = true })
-	hi(0, "TermCursor", {})                                   -- check this can't get this to appear
+	hi(0, "TermCursor", { fg = c.bg, bg = c.gray })                                   -- check this can't get this to appear
 	hi(0, "TermCursorNC", {})                                 -- check this
 	hi(0, "Title", { fg = "Magenta", bold = true }) -- does this change based on the term colors?
 	hi(0, "ToolTip", { link = "StatusLine" })
@@ -215,7 +215,7 @@ function M.highlight()
 	-- diagnostic
 	hi(0, "DiagnosticError", { fg = c.red, bold = true })
 	-- hi(0, "DiagnosticWarn", { fg = c.orange })
-	-- hi(0, "DiagnosticInfo", { fg = c.blue })
+	---hi(0, "DiagnosticInfo", { fg = c.blue })
 	-- hi(0, "DiagnosticHint", { fg = c.violet })
 	hi(0, "DiagnosticDeprecated", { strikethrough = true })
 
