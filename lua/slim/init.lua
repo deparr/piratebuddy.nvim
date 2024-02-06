@@ -117,7 +117,7 @@ function M.highlight()
 	hi(0, "TabLineSel", { fg = c.white_light_2, bg = c.bg_light, bold = true })
 	hi(0, "TermCursor", { fg = c.bg, bg = c.gray })                                   -- check this can't get this to appear
 	hi(0, "TermCursorNC", {})                                 -- check this
-	hi(0, "Title", { fg = "Magenta", bold = true }) -- does this change based on the term colors?
+	hi(0, "Title", { fg = c.white_light_2, bold = true }) -- does this change based on the term colors?
 	hi(0, "ToolTip", { link = "StatusLine" })
 	hi(0, "Visual", { bg = c.bg_light_2 })
 	hi(0, "VisualNOS", { link = "StatusLine" })
@@ -211,6 +211,12 @@ function M.highlight()
 	-- html
 	-- check this, dont know how I want to handle this quite yet
 	-- hi(0, "htmlH1", { fg = c.blue_dark, bold = true })
+
+	-- vimdoc
+	hi(0, "@text.reference.vimdoc", { underline = true })
+	hi(0, "@text.literal.vimdoc", { fg = c.purple_light, bold = true })
+	hi(0, "@text.literal.block.vimdoc", { fg = c.purple_light, bold = true })
+	hi(0, "@text.note.vimdoc", { fg = c.blue_light })
 
 	-- diagnostic
 	hi(0, "DiagnosticError", { fg = c.red, bold = true })
