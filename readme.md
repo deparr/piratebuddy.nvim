@@ -12,10 +12,10 @@ For example, my own config looks like this:
 ```lua
 require("piratebuddy").setup {
 	colors = {
-		tairiki_gray = "#a89984",
+		tairiki_gray = "#a89984", -- adds a new color: `tairiki_gray`
 	},
 	highlights = {
-		["DiffChange"] = { fg = "$blue" },
+		["DiffChange"] = { fg = "$blue" },  -- can also specify RGB values here instead of named colors (#RRGGBB format)
 		["DiffText"] = { fg = "$tairiki_gray" },
 		["FloatBorder"] = { fg = "$bg_dark", bg = "$bg_dark" },
 		["StatusLine"] = { fg = "$white_light", bg = "$bg_light"  },
