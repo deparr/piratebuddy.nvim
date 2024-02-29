@@ -1,13 +1,13 @@
-# piratebuddy - neovim colorscheme
+# piratebuddy.nvim
 ---
 *the result of hours of pouring over dotfiles and vods: a badly written colorscheme*
 
-A simple and clean Neovim theme stolen from the one and only [TGDV](https://github.com/tjdevries)  
+A simple and clean Neovim theme (mostly) stolen from the one and only [TGDV](https://github.com/tjdevries)  
 
 ## Configuration
 You can customize the colors and highlights by passing tables to the setup function. The highlight options are passed directly to `vim.api.nvim_set_hl`.  
 
-The available named colors and set highlights can be seen here [init.lua](lua/slim/init.lua).
+The available named colors and set highlights can be seen in [init.lua](lua/slim/init.lua).
 For example, my own config looks like this:
 ```lua
 require("piratebuddy").setup {
