@@ -259,8 +259,8 @@ function M.highlight()
 	hi(0, "TreesitterContextLineNumber", { fg = c.blue })
 
 	-- do user overrides
-	if vim.g.slim_config.highlights then
-		for hl, cl in pairs(vim.g.slim_config.highlights) do
+	if vim.g.piratebdy_config.highlights then
+		for hl, cl in pairs(vim.g.piratebdy_config.highlights) do
 			hi(0, hl, cl)
 		end
 	end
@@ -268,9 +268,9 @@ end
 
 ---It can't be changed directly by modifying that field due to a Neovim lua bug with global variables (tairiki_config is a global variable)
 function M.set_option(key, value)
-	local conf = vim.g.slim_config
+	local conf = vim.g.piratebdy_config
 	conf[key] = value
-	vim.g.slim_config = conf
+	vim.g.piratebdy_config = conf
 end
 
 function M.load()
@@ -280,7 +280,7 @@ function M.load()
 	end
 
 	vim.o.termguicolors = true
-	vim.g.colors_name = "slim"
+	vim.g.colors_name = "piratebuddy"
 
 	M.highlight()
 end
@@ -288,8 +288,8 @@ end
 -- setups up config
 -- does not load colors
 function M.setup(opts)
-	if not vim.g.slim_config or not vim.g.slim_config.loaded then
-		vim.g.slim_config = vim.tbl_deep_extend("force", vim.g.slim_config or {}, default_opts)
+	if not vim.g.piratebdy_config or not vim.g.piratebdy_config.loaded then
+		vim.g.piratebdy_config = vim.tbl_deep_extend("force", vim.g.piratebdy_config or {}, default_opts)
 		M.set_option("loaded", true)
 	end
 
@@ -309,12 +309,12 @@ function M.setup(opts)
 			end
 		end
 
-		vim.g.slim_config = vim.tbl_deep_extend("force", vim.g.slim_config, opts)
+		vim.g.piratebdy_config = vim.tbl_deep_extend("force", vim.g.piratebdy_config, opts)
 	end
 end
 
 function M.colorscheme()
-	vim.api.nvim_command("colorscheme slim")
+	vim.api.nvim_command("colorscheme piratebdy")
 end
 
 return M
