@@ -314,7 +314,7 @@ function M.setup(opts)
 end
 
 function M.colorscheme()
-	vim.api.nvim_command("colorscheme piratebdy")
+	vim.api.nvim_command("colorscheme piratebuddy")
 end
 
 return M
