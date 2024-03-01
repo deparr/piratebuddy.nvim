@@ -3,6 +3,8 @@
 *the result of hours of pouring over dotfiles and vods: a badly written colorscheme*
 
 A simple and clean Neovim theme (mostly) stolen from the one and only [TGDV](https://github.com/tjdevries)  
+
+---
 ![screenshot_2024-02-29_53](https://github.com/deparr/piratebuddy.nvim/assets/37233002/d6ba9a0d-cf56-4912-b94a-37ccd4ba5975)
 
 ## Configuration
