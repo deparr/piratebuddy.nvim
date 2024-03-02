@@ -5,50 +5,52 @@
 --		fugitive -- prob not woth
 --		true
 local M = {}
-local default_opts = {}
-local c = {
-	bg = "#151515",
-	bg_light = "#1d2021", -- gruvbox dark bg0_h
-	bg_light_2 = "#282828", -- gruvbox dark bg
-	bg_dark = "#080808",
-	white = "#ebdbb2",
-	white_light = "#e0e0e0",
-	white_light_2 = "#fafafa",
-	gray = "#696969",    -- tairiki gray,
-	gray_light = "#9c9c9c", -- tairiki gray, lightened
-	gray_dark = "#404040", -- tairiki gray, darkened
-	red = "#cc6666",     -- tomorrow night red
-	red_light = "#d98c8c",
-	red_light_2 = "#e6b3b3",
-	red_dark = "#bf4040",
-	pink = "#fef601",
-	green = "#99cc99",
-	yellow = "#f8fe7a",
-	yellow_light = "#fbffae",
-	yellow_dark = "#f5fe48",
-	blue = "#81a2be", -- not sure about this blue -- tairiki blue,
-	blue_light = "#a4bcd0",
-	blue_dark = "#618aae",
-	aqua = "#8ec07c", -- gruvbox dark aqua light,
-	cyan = "#8abeb7",
-	purple = "#8e6fbd",
-	purple_light = "#aa93cd",
-	purple_light_2 = "#c5b6dd",
-	violet = "#b294bb",
-	violet_dark = "#9c76a7",
-	orange = "#de935f",
-	orange_light = "#e7b088",
-	orange_light_2 = "#efccb3",
-	orange_dark = "#d57734",
-	orange_sat = "#f1904b",
-	brown = "#a3685a",
-	seagreen = "#698b69",
+local default_opts = {
+	colors = {
+		bg = "#111111",
+		bg_light = "#1d2021", -- gruvbox dark bg0_h
+		bg_light_2 = "#282828", -- gruvbox dark bg
+		bg_dark = "#080808",
+		white = "#ebdbb2",
+		white_light = "#e0e0e0",
+		white_light_2 = "#fafafa",
+		gray = "#696969", -- tairiki gray,
+		gray_light = "#9c9c9c", -- tairiki gray, lightened
+		gray_dark = "#404040", -- tairiki gray, darkened
+		red = "#cc6666", -- tomorrow night red
+		red_light = "#d98c8c",
+		red_light_2 = "#e6b3b3",
+		red_dark = "#bf4040",
+		pink = "#fef601",
+		green = "#99cc99",
+		yellow = "#f8fe7a",
+		yellow_light = "#fbffae",
+		yellow_dark = "#f5fe48",
+		blue = "#81a2be", -- not sure about this blue -- tairiki blue,
+		blue_light = "#a4bcd0",
+		blue_dark = "#618aae",
+		aqua = "#8ec07c", -- gruvbox dark aqua light,
+		cyan = "#8abeb7",
+		purple = "#8e6fbd",
+		purple_light = "#aa93cd",
+		purple_light_2 = "#c5b6dd",
+		violet = "#b294bb",
+		violet_dark = "#9c76a7",
+		orange = "#de935f",
+		orange_light = "#e7b088",
+		orange_light_2 = "#efccb3",
+		orange_dark = "#d57734",
+		orange_sat = "#f1904b",
+		brown = "#a3685a",
+		seagreen = "#698b69",
+	},
 }
 
 function M.highlight()
 	local hi = vim.api.nvim_set_hl
-	-- hi( 0, "Name", { fg, bg, sp, blend, bold, underline, italic, reverse, link, }
+	local c = vim.g.piratebdy_config.colors
 
+	-- hi( 0, "Name", { fg, bg, sp, blend, bold, underline, italic, reverse, link, }
 	-- vim highlights
 	hi(0, "ColorColumn", { fg = c.none, bg = c.bg_light_2 })
 	hi(0, "Conceal", { fg = c.gray, bg = c.none })
@@ -66,7 +68,7 @@ function M.highlight()
 	hi(0, "DiffDelete", { fg = c.red })
 	hi(0, "diffRemoved", { link = "DiffDelete" })
 	hi(0, "DiffText", { fg = c.gray })
-	hi(0, "Directory", { fg = c.blue })      -- is orange:light in orig
+	hi(0, "Directory", { fg = c.blue }) -- is orange:light in orig
 	hi(0, "EndOfBuffer", { fg = c.gray })
 	hi(0, "ErrorMsg", { fg = c.red })
 	hi(0, "FloatBorder", { fg = c.white_light_2, bg = c.bg_dark })
@@ -92,10 +94,10 @@ function M.highlight()
 	hi(0, "PmenuSel", { fg = c.bg, bg = c.yellow_light })
 	hi(0, "PmenuSbar", { fg = c.none, bg = c.bg })
 	hi(0, "PmenuThumb", { fg = c.none, bg = c.gray_dark })
-	hi(0, "PmenuExtra", { fg = c.red_bright, bg = c.bg_light })  -- check this not sure where these extra and kind are used
+	hi(0, "PmenuExtra", { fg = c.red_bright, bg = c.bg_light }) -- check this not sure where these extra and kind are used
 	hi(0, "PmenuExtraSel", { fg = c.red_bright, bg = c.bg_light_2 }) -- check this
-	hi(0, "PmenuKind", { fg = c.blue, bg = c.bg_light })         -- check this
-	hi(0, "PmenuKindSel", { fg = c.blue, bg = c.bg_light_2 })     -- check this
+	hi(0, "PmenuKind", { fg = c.blue, bg = c.bg_light }) -- check this
+	hi(0, "PmenuKindSel", { fg = c.blue, bg = c.bg_light_2 }) -- check this
 	hi(0, "Question", { link = "Normal" })
 	hi(0, "QuickFixLine", { fg = c.blue, underline = true })
 	hi(0, "qfSeparator", { fg = c.gray })
@@ -113,10 +115,10 @@ function M.highlight()
 	hi(0, "StatusLineNC", { fg = c.gray, bg = c.bg_light_2 })
 	hi(0, "Substitute", { link = "Search" })
 	hi(0, "TabLine", { fg = c.blue_dark, bg = c.bg_light })
-	hi(0, "TabLineFill", { fg = c.white, bg = c.bg_light_2, }) -- check this
+	hi(0, "TabLineFill", { fg = c.white, bg = c.bg_light_2 }) -- check this
 	hi(0, "TabLineSel", { fg = c.white_light_2, bg = c.bg_light, bold = true })
-	hi(0, "TermCursor", { fg = c.bg, bg = c.gray })                                   -- check this can't get this to appear
-	hi(0, "TermCursorNC", {})                                 -- check this
+	hi(0, "TermCursor", { fg = c.bg, bg = c.gray }) -- check this can't get this to appear
+	hi(0, "TermCursorNC", {}) -- check this
 	hi(0, "Title", { fg = c.white_light_2, bold = true }) -- does this change based on the term colors?
 	hi(0, "ToolTip", { link = "StatusLine" })
 	hi(0, "Visual", { bg = c.bg_light_2 })
@@ -151,16 +153,16 @@ function M.highlight()
 	hi(0, "Keyword", { fg = c.violet })
 	hi(0, "Exception", { fg = c.bright_red })
 
-	hi(0, "PreProc", { fg = c.yellow })          -- check this
-	hi(0, "Include", { fg = c.cyan })            -- check this
-	hi(0, "Define", { fg = c.cyan })             -- check this
+	hi(0, "PreProc", { fg = c.yellow }) -- check this
+	hi(0, "Include", { fg = c.cyan }) -- check this
+	hi(0, "Define", { fg = c.cyan }) -- check this
 	hi(0, "Macro", { fg = c.orange })
-	hi(0, "PreCondit", { fg = c.purple })        -- check this
+	hi(0, "PreCondit", { fg = c.purple }) -- check this
 
 	hi(0, "Type", { fg = c.violet, italic = true }) -- check this
 	hi(0, "StorageClass", { fg = c.yellow })
-	hi(0, "Structure", { fg = c.violet })        -- check this
-	hi(0, "Typedef", { fg = c.yellow })          -- check this
+	hi(0, "Structure", { fg = c.violet }) -- check this
+	hi(0, "Typedef", { fg = c.yellow }) -- check this
 
 	hi(0, "Special", { fg = c.purple_light, bold = true })
 	hi(0, "SpecialChar", { fg = c.brown })
@@ -229,6 +231,7 @@ function M.highlight()
 	hi(0, "@module", { fg = c.blue })
 	hi(0, "@include", { link = "Include" })
 	hi(0, "@keyword", { link = "Keyword" })
+	hi(0, "@keyword.conditional", { link = "Conditional" })
 	hi(0, "@keyword.faded", { fg = c.gray })
 	hi(0, "@variable", { fg = c.white_light, bg = c.none })
 	hi(0, "@variable.builtin", { fg = c.purple_light_2 })
@@ -260,8 +263,8 @@ function M.highlight()
 
 	-- do user overrides
 	if vim.g.piratebdy_config.highlights then
-		for hl, cl in pairs(vim.g.piratebdy_config.highlights) do
-			hi(0, hl, cl)
+		for group, opts in pairs(vim.g.piratebdy_config.highlights) do
+			hi(0, group, opts)
 		end
 	end
 end
@@ -274,9 +277,9 @@ function M.set_option(key, value)
 end
 
 function M.load()
-	vim.cmd "hi clear"
+	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
-		vim.cmd "syntax reset"
+		vim.cmd("syntax reset")
 	end
 
 	vim.o.termguicolors = true
@@ -295,15 +298,15 @@ function M.setup(opts)
 
 	if opts then
 		if opts.colors then
-			c = vim.tbl_deep_extend("force", c, opts.colors)
+			opts.colors = vim.tbl_deep_extend("keep", opts.colors, vim.g.piratebdy_config.colors)
 		end
 
 		-- hacky way to use the predefined colors on new highlights
 		if opts.highlights then
-			for _, cl in pairs(opts.highlights) do
-				for opt, val in pairs(cl) do
+			for _, hl_opts in pairs(opts.highlights) do
+				for opt, val in pairs(hl_opts) do
 					if type(val) == "string" and val:sub(1, 1) == "$" then
-						cl[opt] = c[val:sub(2)]
+						hl_opts[opt] = opts.colors[val:sub(2)]
 					end
 				end
 			end
