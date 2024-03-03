@@ -181,7 +181,6 @@ function M.highlight()
 	hi(0, "Todo", { fg = c.yellow })
 
 	-- lang specific
-	-- these might not be canon anymore
 	-- lua
 	hi(0, "luaStatement", { fg = c.yellow_dark, bold = true })
 	hi(0, "luaKeyword", { fg = c.orange_dark, bold = true })
@@ -245,6 +244,20 @@ function M.highlight()
 	hi(0, "@normal", { link = "Normal" })
 	hi(0, "@punctuation.bracket", { fg = c.violet, bold = true })
 	hi(0, "@text.title", { link = "Title" })
+	hi(0, "@markup.heading", { link = "Title" })
+	hi(0, "@markup.heading.1.marker", { fg = c.yellow })
+	hi(0, "@markup.heading.2.marker", { fg = c.yellow })
+	hi(0, "@markup.heading.3.marker", { fg = c.yellow })
+	hi(0, "@markup.heading.4.marker", { fg = c.yellow })
+	hi(0, "@markup.heading.5.marker", { fg = c.yellow })
+	hi(0, "@markup.heading.6.marker", { fg = c.yellow })
+	hi(0, "@markup.raw", { link = "Comment" })
+	hi(0, "@markup.raw.delimiter", { link = "Delimiter" })
+	hi(0, "@markup.strong", { bold = true })
+	hi(0, "@markup.italic", { italic = true })
+
+	-- markdown
+	hi(0, "@conceal.markdown_inline", { link = "Delimiter" })
 
 	-- lsp semantic highlights get outta here
 	hi(0, "@lsp.type.variable", {})
