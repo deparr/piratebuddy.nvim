@@ -26,9 +26,10 @@ local default_opts = {
 		yellow = "#f8fe7a",
 		yellow_light = "#fbffae",
 		yellow_dark = "#f5fe48",
-		blue = "#81a2be", -- not sure about this blue -- tairiki blue,
+		blue = "#81a2be",
 		blue_light = "#a4bcd0",
 		blue_dark = "#618aae",
+		blue_dark_2 = "#4b7091",
 		aqua = "#8ec07c", -- gruvbox dark aqua light,
 		cyan = "#8abeb7",
 		purple = "#8e6fbd",
@@ -121,7 +122,7 @@ function M.highlight()
 	hi(0, "TermCursorNC", {}) -- check this
 	hi(0, "Title", { fg = c.white_light_2, bold = true }) -- does this change based on the term colors?
 	hi(0, "ToolTip", { link = "StatusLine" })
-	hi(0, "Visual", { bg = c.bg_light_2 })
+	hi(0, "Visual", { bg = c.blue_dark_2 })
 	hi(0, "VisualNOS", { link = "StatusLine" })
 	hi(0, "WarningMsg", { link = "StatusLine" })
 	hi(0, "Whitespace", { fg = c.gray })
